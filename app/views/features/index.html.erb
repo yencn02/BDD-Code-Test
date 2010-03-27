@@ -1,0 +1,8 @@
+<h1>Feature List</h1>
+
+<ul>
+  <% @features.each do |feature| %>
+    <li> <%= link_to feature.title, feature %> </li>
+  <% end %>
+</ul>
+<%= link_to 'New', new_feature_path %>

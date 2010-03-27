@@ -1,0 +1,19 @@
+<h1>Feature Details</h1>
+  <p>
+    Feature-Title: <%= @feature.title%>
+  </p>
+  <%
+    scenarios = @feature.scenarios
+  %>
+  <p>
+    <h3> List of scenarios of this feature </h3> <%= link_to "Add scenario", "#{new_scenario_path}#{params[:id]}"%>
+  </p>
+  <%@feature.scenarios.each{|s|%>
+    <p><b>Scenario: <%=s.title%></b></p>
+    <div style="padding-left:15px;">
+      <p>Given-Block: <%=s.given_block%></p>
+      <p>When-Block: <%=s.when_block%></p>
+      <p>Then-Block: <%=s.then_block%></p>
+    </div>
+  <%}%>
+<%= link_to 'Back', features_path %>
