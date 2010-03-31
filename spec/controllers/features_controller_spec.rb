@@ -43,7 +43,21 @@ describe FeaturesController do
 
 
   describe "POST create" do
-
+    it "call create_feature method and return true" do 
+      feature = {"title" => "Test"}
+      scenario = {"title" => "Test", "given_block" => "Test", "when_block" => "Test", "then_block" => "Test"}
+      Feature.should_receive(:create_feature).with(feature, scenario).and_return true
+      post :create, :feature => feature, :scenario => scenario
+      flash[:notice].should == "Feature was successfully created."
+      response.should redirect_to(features_path)
+    end
+    it "call create_feature method and return false" do 
+      feature = nil
+      scenario = nil
+      Feature.should_receive(:create_feature).with(feature, scenario).and_return false
+      post :create, :feature => feature, :scenario => scenario
+      response.should render_template("new")
+    end
 
   end
 

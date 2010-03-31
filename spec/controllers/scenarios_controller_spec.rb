@@ -18,6 +18,25 @@ describe ScenariosController do
   end
 
   describe "POST create" do
+    it "call create_feature method and return true" do 
+      feature = {"title" => "Test", "id" => 1}
+      scenario = {"title" => "Test", "given_block" => "Test", "when_block" => "Test", "then_block" => "Test"}
+      feature_obj = mock_model(Feature,{:id => 1})
+      result = [true, feature_obj]
+      Scenario.should_receive(:create_scenario).with(feature, scenario).and_return(result)
+      post :create, :feature => feature, :scenario => scenario
+      flash[:notice].should == "Scenario was successfully created."
+      response.should redirect_to("/features/1")
+    end
+    it "call create_feature method and return false" do 
+      feature = nil
+      scenario = nil
+      feature_obj = mock("Something")
+      result = [false, feature_obj]
+      Scenario.should_receive(:create_scenario).with(feature, scenario).and_return(result)
+      post :create, :feature => feature, :scenario => scenario
+      response.should render_template("new")
+    end
 
   end
 

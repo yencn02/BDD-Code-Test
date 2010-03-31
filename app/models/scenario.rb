@@ -4,8 +4,7 @@ class Scenario < ActiveRecord::Base
   def self.create_scenario(feature, scenario)
     feature = Feature.update(feature[:id], :title => feature[:title])
     scenario = Scenario.new(scenario)
-    feature.scenarios << scenario
-    result = feature.save
+    result = feature.scenarios << scenario
     return result, feature
   end
 end
