@@ -29,8 +29,8 @@ describe ScenariosController do
       response.should redirect_to("/features/1")
     end
     it "call create_feature method and return false" do 
-      feature = nil
-      scenario = nil
+      feature = {}
+      scenario = {}
       feature_obj = mock("Something")
       result = [false, feature_obj]
       Scenario.should_receive(:create_scenario).with(feature, scenario).and_return(result)

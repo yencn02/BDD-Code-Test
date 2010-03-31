@@ -66,10 +66,12 @@ describe Scenario do
 
     scenarios = mock("List of Scenarios of a feature")
     feature.should_receive(:scenarios).and_return(scenarios)
-
-    result = mock("Result")
-    scenarios.should_receive(:<<).with(scenario).and_return result
     
+    scenarios.should_receive(:<<).with(scenario).and_return scenarios
+    
+    result = mock("Result")
+    feature.should_receive(:save).and_return(result)
+
     Scenario.create_scenario(feature_atrributes, scenario_attributes).should == [result, feature]
 
   end
